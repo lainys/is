@@ -24,8 +24,14 @@ idx = zeros(size(X,1), 1);
 
 calc = zeros(K,1);
 
+
 for i=1:length(X)
-    [~,idx(i)] = min(sum((centroids-X(i,:)).^2,2));
+    for j=1:K
+        a = centroids(j,:) - X(i,:); 
+        a = a.^2;
+        calc(j) = sum(a,2);
+    end
+    [~,idx(i)] = min(calc);
 end
 % =============================================================
 
